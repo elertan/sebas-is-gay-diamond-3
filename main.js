@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const colors = require('colors/safe');
 const config = require('./config');
 
 mongoose.connect(config.database.url, function (err) {
@@ -34,6 +35,8 @@ app.get('/register', function (req, res) {
 
 app.post('/login', function (req, res) {	    
     const form = req.body;
+    
+    console.log(colors.blue('Login posted!'));
     
     User.find({ email: form.email }, function (err, users) {
         if (users.length > 0) {
